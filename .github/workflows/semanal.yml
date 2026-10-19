@@ -79,3 +79,19 @@ jobs:
               --title "Reporte ${{ steps.pdf.outputs.semana }}" \
               --notes "Reporte semanal generado automaticamente con datos publicos del COES. Proyecto independiente, no afiliado al COES."
           fi
+
+      # La imagen va al mismo Release para tener una URL publica que la tarjeta de Teams pueda mostrar
+      - name: Subir la imagen del grafico al Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          SEMANA="${{ steps.pdf.outputs.semana }}"
+          IMAGEN=$(python -m src.notify imagen --semana "$SEMANA" | tail -1)
+          gh release upload "semana-$SEMANA" "$IMAGEN" --clobber
+
+      # Si el secreto no existe, el envio se omite sin fallar el workflow
+      - name: Enviar el resumen a Teams
+        env:
+          TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
+          TEAMS_DASHBOARD_URL: ${{ vars.TEAMS_DASHBOARD_URL }}
+        run: python -m src.notify enviar --semana "${{ steps.pdf.outputs.semana }}"

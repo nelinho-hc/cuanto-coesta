@@ -24,6 +24,13 @@
 - [x] Fase 6: PDF editorial apaisado y opcional
 - [x] Fase 7: documentacion, capturas y entrega
 
+### Integracion con Teams (rama feature/notificacion-teams)
+
+- [x] Tarjeta semanal en el canal: titulares, grafico de precio por hora y botones (dashboard y PDF)
+- [x] Paso propio del workflow, despues del Release, para que la imagen tenga URL publica
+- [x] Secreto TEAMS_WEBHOOK_URL (produccion) o config/interno.yaml (pruebas locales); sin URL no envia nada
+- Pendiente: pestaña propia en Teams (requiere aprobacion de TI) y version visual de escritorio en la web
+
 ## Bitacora
 
 ### Fase previa (2026-10-09, antes del prompt maestro)
