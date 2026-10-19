@@ -8,6 +8,7 @@ __pycache__/
 data/raw/
 data/processed/
 reports/*.pdf
+reports/*.png
 !reports/.gitkeep
 data/estado_fuentes.json
 data/ahora/
